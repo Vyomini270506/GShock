@@ -6,12 +6,12 @@ const TASTES = ['Bold', 'Strong', 'Bitter', 'Refreshing', 'Citrus', 'Fruity', 'C
 const TIMES = ['Morning', 'Afternoon', 'Evening', 'Night', 'Any'];
 
 const BrewAI = () => {
-  const [sel, setSel] = useState({ mood: '', taste: '', time: '' });
+  const [sel, setSel] = useState({ mood: '', taste: '', timeOfDay: '' });
   const [result, setResult] = useState<any>(null);
   const [loading, setLoading] = useState(false);
 
   const handleBrew = async () => {
-    if (!sel.mood || !sel.taste || !sel.time) return alert("Please select all options!");
+    if (!sel.mood || !sel.taste || !sel.timeOfDay) return alert("Please select all options!");
     setLoading(true);
     try {
       const API_BASE = import.meta.env.VITE_BACKEND_API_URL || 'http://localhost:5001';
@@ -55,8 +55,8 @@ const BrewAI = () => {
             <h2 className="text-xl font-bold mb-4 flex gap-3 items-center"><span className="text-[#D99A46]">03</span> TIME OF DAY</h2>
             <div className="flex flex-wrap gap-2">
               {TIMES.map(tm => (
-                <button key={tm} onClick={() => setSel({...sel, time: tm})} 
-                  className={`px-6 py-2 border-2 font-bold transition-all ${sel.time === tm ? 'bg-[#D99A46] border-[#D99A46] text-[#3E2723]' : 'border-[#D99A46]/30 hover:border-[#D99A46]'}`}>{tm.toUpperCase()}</button>
+                <button key={tm} onClick={() => setSel({...sel, timeOfDay: tm})} 
+                  className={`px-6 py-2 border-2 font-bold transition-all ${sel.timeOfDay === tm ? 'bg-[#D99A46] border-[#D99A46] text-[#3E2723]' : 'border-[#D99A46]/30 hover:border-[#D99A46]'}`}>{tm.toUpperCase()}</button>
               ))}
             </div>
           </div>
