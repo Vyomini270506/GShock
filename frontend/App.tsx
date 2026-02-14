@@ -1,4 +1,5 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Chatbot from './components/Chatbot'; // <--- Import here
@@ -23,10 +24,35 @@ import Profile from './pages/Profile';
 import Artist from './pages/Artist';
 import OurStory from './pages/OurStory';
 import VisitCafe from "./pages/VisitCafe";
+import AIRecommend from './pages/AIRecommend';
+import BrewAI from './pages/BrewAI';
 const App = () => {
   const location = useLocation();
   const isAuthPage = location.pathname.startsWith('/login') || location.pathname.startsWith('/admin');
+const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    // Simulate loading or wait for critical assets
+    const timer = setTimeout(() => setLoading(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#3E2723]">
+        <div className="relative">
+          <img 
+            src="https://ik.imagekit.io/btpcp9tvm/GShock/Rabuste%20logo.png" 
+            className="h-16 md:h-24 animate-pulse" 
+            alt="Loading..." 
+          />
+          <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-32 h-1 bg-gold/20 rounded-full overflow-hidden">
+            <div className="h-full bg-gold animate-[progress_2s_ease-in-out]" />
+          </div>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="min-h-screen flex flex-col font-sans bg-cream text-[#3E2723] selection:bg-gold selection:text-white">
       
@@ -53,6 +79,8 @@ const App = () => {
             <Route path="/artist/:id" element={<Artist/>}/>
             <Route path="/ourstory" element={<OurStory/>}/>
             <Route path="/visit-cafe" element={<VisitCafe />} />
+            <Route path="/ai" element={<AIRecommend />} />
+            <Route path="/brew-ai" element={<BrewAI />} />
           </Routes>
         </main>
 
